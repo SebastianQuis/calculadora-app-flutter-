@@ -1,0 +1,25 @@
+import 'package:flutter/material.dart';
+
+class MainResultText extends StatelessWidget {
+
+  final String text;
+
+  const MainResultText({ 
+    Key? key, 
+    required this.text
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // color: Colors.red,
+      margin: EdgeInsets.only( bottom: 10, right: 10 ),
+      width: double.infinity,
+      alignment: Alignment.centerRight,
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: Text( this.text , style: TextStyle(fontSize: 40, color: Colors.black54 ))
+      ),
+    );
+  }
+}
