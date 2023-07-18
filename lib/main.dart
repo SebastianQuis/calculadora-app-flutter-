@@ -1,7 +1,6 @@
 import 'package:calculadora/screens/calculator_screen.dart';
 import 'package:flutter/material.dart';
 
- 
 void main() => runApp(MyApp());
  
 class MyApp extends StatelessWidget {
@@ -9,10 +8,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Material App',
+      title: 'Calculator App - GetX',
       home: CalculatorScreen(),
       theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Color.fromARGB(255, 233, 236, 241),
+        useMaterial3: true,
+        scaffoldBackgroundColor: Color.fromARGB(255, 233, 233, 236),
       ),
     );
   }

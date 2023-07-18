@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SubResult extends StatelessWidget {
+class SubResultText extends StatelessWidget {
 
   final String text;
   final double size;
 
-  const SubResult({
+  const SubResultText({
     required this.text,
     this.size = 40,
   });
@@ -13,7 +13,6 @@ class SubResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: double.infinity,
       alignment: Alignment.centerRight,
       child: Text( this.text , style: TextStyle(fontSize: size ) ),
     );

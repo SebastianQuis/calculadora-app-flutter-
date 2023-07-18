@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 
 import 'package:calculadora/controllers/calculator_controller.dart';
-import 'package:calculadora/widgets/sub_result.dart';
-import 'package:calculadora/widgets/main_result.dart';
+import 'package:calculadora/widgets/widgets.dart';
 
 class MathResults extends StatelessWidget {
 
@@ -20,16 +20,16 @@ class MathResults extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              SubResult( text: '${calculatorCtrl.primerNumero}' ),
+              SubResultText( text: '${calculatorCtrl.firstNumber}' ),
               SizedBox(width: 5,),
-              SubResult( text: '${calculatorCtrl.operacion}', size: 25, ),
+              SubResultText( text: '${calculatorCtrl.operation}', size: 25, ),
               SizedBox(width: 5,),
-              SubResult( text: '${calculatorCtrl.segundoNumero}' ),
+              SubResultText( text: '${calculatorCtrl.secondNumber}' ),
             ],
           ),
         ),
 
-        MainResultText( text: '${calculatorCtrl.resultado}' ),
+        ResultText( text: '${calculatorCtrl.result}' ),
       ],
     ));
   }

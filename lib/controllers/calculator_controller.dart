@@ -3,100 +3,109 @@ import 'package:get/get.dart';
 
 class CalculatorController extends GetxController{
 
-  var primerNumero  = '1'.obs;
-  var segundoNumero = '2'.obs;
-  var resultado     = '3'.obs;
-  var operacion     = '+'.obs;
+  var firstNumber  = '0'.obs;
+  var secondNumber = '0'.obs;
+  var result       = '0'.obs;
+  var operation    = '+'.obs;
 
   resetAC() {
-    this.primerNumero.value  = '0';
-    this.segundoNumero.value = '0';
-    this.resultado.value     = '0';
-    this.operacion.value     = '+';
+    this.firstNumber.value  = '0';
+    this.secondNumber.value = '0';
+    this.result.value     = '0';
+    this.operation.value     = '+';
   }
 
   addNumber( String number ) {
-    if (resultado.value == '0') 
-      return resultado.value = number;
+    if (result.value == '0') 
+      return result.value = number;
     
-    // TODO: VALOR NEGATIVO
-    if (resultado.startsWith('-0'))
-      return resultado.value = '-' + number;
+    if (result.startsWith('-0'))
+      return result.value = '-' + number;
 
-    resultado.value = resultado.value + number;
+    result.value = result.value + number;
   }
 
   changeOperation() {
-    if (resultado.startsWith('-') ) {
-      resultado.value = resultado.value.replaceFirst('-', '');
+    if (result.startsWith('-') ) {
+      result.value = result.value.replaceFirst('-', '');
     } else {
-      resultado.value = '-' + resultado.value;
+      result.value = '-' + result.value;
     }
   }
 
   addPoint() {
-    if (resultado.contains('.')) return;
+    if (result.contains('.')) return;
 
-    if (resultado.startsWith('0')) {
-      return resultado.value = '0.';
-    } else {
-      return resultado.value += '.';
-    }
+    (result.startsWith('0')) 
+      ? result.value = '0.' 
+      : result.value += '.';
   }
 
   selectOperation(String newOperation) {
-    operacion.value    = newOperation;
+    operation.value = newOperation;
 
-    if (primerNumero.value == '0') {
-      primerNumero.value = resultado.value;
-    }
+    if (firstNumber.value == '0') 
+      firstNumber.value = result.value;
 
-    resultado.value = '0';
+
+    result.value = '0';
   }
 
+  selectPercentage() => result.value = result.value + '%';
+
   deleteLastEntry() {
-    if (resultado.value.replaceAll('-', '').length > 1) { // si en caso sea negativo, que se borre internamente para la condicion
-      resultado.value = resultado.value.substring(0, resultado.value.length - 1);
-    } else {
-      resultado.value = '0';
-    }
+    (result.value.replaceAll('-', '').length > 1) // si en caso sea negativo, que se borre internamente para la condicion
+      ? result.value = result.value.substring(0, result.value.length - 1)
+      : result.value = '0';
+    
   }
 
   calculateResult() {
+    firstNumber.value = clearPercentage(firstNumber.value);
+    result.value      = clearPercentage(result.value);
     
-    double num1 = double.parse(primerNumero.value);
-    double num2 = double.parse(resultado.value);
+    double num1 = double.parse(firstNumber.value);
+    double num2 = double.parse(result.value);
     List<String> splitted;
 
-    segundoNumero.value = resultado.value;
+    secondNumber.value = result.value;
 
-    switch (operacion.value) {
+    switch (operation.value) {
       case '+':
-        resultado.value = '${num1 + num2}';
+        result.value = '${num1 + num2}';
         break;
       case '-':
-        resultado.value = '${num1 - num2}';
+        result.value = '${num1 - num2}';
         break;
       case 'X':
-        resultado.value = '${num1 * num2}';
+        result.value = '${num1 * num2}';
         break;
       case '/':
-        resultado.value = '${num1 / num2}';
+        result.value = '${num1 / num2}';
         break;
       default:
         break;
     }
 
-    if (resultado.value.endsWith('.0')) {
-      resultado.value = resultado.value.substring(0, resultado.value.length - 2);
-    }
+    if (result.value.endsWith('.0')) // si es 20.0
+      result.value = result.value.substring(0, result.value.length - 2);
 
-    if (resultado.value.contains('.')) {
-      splitted = resultado.value.split('.');
+    if (result.value.contains('.')) { // que salga maximo dos decimales
+      splitted = result.value.split('.');
       if (splitted[1].length > 2) {
-        resultado.value = splitted[0] + '.' + splitted[1].substring(0,2);
+        result.value = splitted[0] + '.' + splitted[1].substring(0,2);
       }
     }    
-  }  
+  }
+
+  clearPercentage(String number) {
+    if (number.contains('%')) {
+      double value = double.parse(number.replaceAll('%', ''));
+      double result = value * 0.01;
+      return result.toString();
+    } else {
+      return number;
+    }
+  }
 
 }

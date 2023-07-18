@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class MainResultText extends StatelessWidget {
+class ResultText extends StatelessWidget {
 
   final String text;
 
-  const MainResultText({ 
+  const ResultText({ 
     Key? key, 
     required this.text
   }) : super(key: key);
@@ -12,7 +12,6 @@ class MainResultText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Colors.red,
       margin: EdgeInsets.only( bottom: 10, right: 10 ),
       width: double.infinity,
       alignment: Alignment.centerRight,
